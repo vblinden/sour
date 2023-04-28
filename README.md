@@ -27,6 +27,33 @@ export const handler = [
 
 ```
 
+After this you can add access and modify the session in your handlers, like:
+
+```typescript
+export const hander: Handlers<Data, WithSession> = {
+  GET(_request, context) {
+    const { session } = context.state;
+
+    // Get a value...
+    session.get("user_id");
+
+    // Set a value...
+    session.set("user_id", 973891); 
+
+    // Check if session has value...
+    session.has("user_id");
+
+    // Flash a value to the session, which will get deleted when it is accessed...
+    session.flash("error", "Username is required");
+
+    // Will delete the session...
+    session.delete();
+
+    return context.render!();
+  },
+};
+```
+
 ### Memory
 
 ### PostgreSQL
