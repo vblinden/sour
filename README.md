@@ -30,6 +30,8 @@ export const handler = [
 After this you can add access and modify the session in your handlers, like:
 
 ```typescript
+import { WithSession } from "https://deno.land/x/sour/types.ts";
+
 export const hander: Handlers<Data, WithSession> = {
   GET(_request, context) {
     const { session } = context.state;
@@ -55,10 +57,20 @@ export const hander: Handlers<Data, WithSession> = {
 ```
 
 ### Memory
+This is the most simple store, sessions are gone after you restart the application.
+
+```typescript
+const store = new Memory();
+```
 
 ### PostgreSQL
 
-This store uses the [postgresjs](https://deno.land/x/postgresjs) library.
+This store uses the [postgresjs](https://deno.land/x/postgresjs) library to execute its queries.
+
+```typescript
+import { sql } from "./db.ts";
+const store = new Postgres(sql);
+```
 
 Don't forget too apply the following query to your database:
 ```sql
@@ -75,6 +87,7 @@ TODO
 TODO
 
 ### Cookie
+Use the `middlewareCookie` instead of `middleware`. 
 
 ## Credit
 
