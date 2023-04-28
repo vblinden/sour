@@ -1,4 +1,4 @@
-import { SessionData } from "../session.ts";
+import { SessionData } from "../types.ts";
 
 export default interface Store {
   exists(sessionId: string): Promise<boolean> | boolean;
