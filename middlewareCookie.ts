@@ -40,6 +40,10 @@ export const middleware = async (
   const sessionId = getCookies(request.headers)[cookieName] ?? await nanoid(32);
   const url = new URL(request.url);
 
+  if (["_frsh", ".ico"].some((part) => url.pathname.includes(part))) {
+    return await context.next();
+  }
+
   let data: Promise<SessionData | null> | SessionData | null = null;
 
   if (sessionId) {
