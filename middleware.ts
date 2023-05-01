@@ -61,6 +61,7 @@ export const middleware = async (
   });
 
   if (data._delete) {
+    await options.store?.delete(sessionId);
     deleteCookie(response.headers, cookieName);
   }
 
